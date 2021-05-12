@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h3 class="my-3 border-bottom pb-2">모델 결과</h3>
+    <form method="post" class="post-form my-3">        
+        <div class="form-group">
+            <label for="input_img">원본 이미지</label><br>
+            <!-- {% for image in model.upload_set %}
+                <li>
+                    <img src="C:\projects\web_test3\web\static\inputImage\중국어.PNG" alt="ddd">
+                    <img src="{{ url_for('static/inputImage', filename=image.image_name) }}" alt="Original">
+                </li>
+            {% endfor %} -->
+
+             <img src="{{ url_for('static', filename=image_name) }}" alt="Original">
+             <!-- <img src="{{ url_for('static', filename=image_path) }}" alt="Original"> -->
+
+        </div>
+        <div class="form-groupt">
+            <label for="result_img">결과 이미지</label><br>
+            <img src="" alt="Result">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

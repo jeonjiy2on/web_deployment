@@ -1,0 +1,45 @@
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container my-3">
+    <h3 class="border-bottom py-2">{{ model.model_name }}</h3>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ model.model_detail }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge badge-light p-2">
+                    {{ model.create_date|datetime }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <h5 class="border-bottom my-3 py-2">이미지를 등록하세요.</h5>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="d-flex justify-content-end">
+                <form action="{{ url_for('result.upload_file', model_id=model.id) }}" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="image/png">
+                    <input type="submit" value="전송" name="submit" class="btn btn-primary">           
+                </form>
+            </div>
+        </div>
+    <!-- <h5 class="border-bottom my-3 py-2">결과?</h5>
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-end">
+                    <div>
+                        <ul>
+                            {% for file in model.upload_set %}
+                                <li>{{ file }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+{% endblock %}

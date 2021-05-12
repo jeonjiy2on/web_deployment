@@ -1,0 +1,37 @@
+
+<!doctype html>
+
+<html lang="ko">
+<head>
+    <!-- Required meta tegs -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <title>Pleiony</title>
+
+    <!-- web CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Hello, WEB</title>
+
+    
+</head>
+
+<body>
+<!-- 내비게이션 바 -->
+{% include "navbar.html" %}
+
+<!-- 기본 템플릿에 삽입할 내용 start -->
+{% block content %}
+{% endblock %}
+<!-- 기본 템플릿에 삽입할 내용 end -->
+
+<!-- jQuery JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}"> -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-3">
+    <h3 class="border-bottom py-2">모델 리스트</h3>
+
+
+    <table class="table">
+
+        <thead>
+        <tr class="thead-dark">
+            <th>번호</th>
+            <th>모델명</th>
+            <th>모델소개</th>
+            <!-- <th>작성일시</th> -->
+        </tr>    
+        </thead>
+
+        <tbody>
+        {% if model_list %}
+        {% for model in model_list.items %}
+        <tr>
+            <td>{{ model_list.total-((model_list.page-1)*model_list.per_page)-loop.index0 }}</td>
+            <td>
+                <a href="{{ url_for('model.detail', model_id=model.id) }}">{{ model.model_name }}</a>
+            </td>
+            <td>{{ model.model_detail }}</td>
+
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">모델이 존재하지 않습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+
+    </table>
+
+    <!-- 페이징 처리 start -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전 페이지 -->
+        {% if model_list.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ model_list.prev_num }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tableindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+
+        {% for page_num in model_list.iter_pages() %}
+            {% if page_num %}
+                {% if page_num != model_list.page %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                </li>
+                {% else %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">{{ page_num }}</a>
+                </li>
+                {% endif %}
+            {% else %}
+                <li class="disabled"><a class="page-link" href="#">...</a></li>
+            {% endif %}
+        {% endfor %}
+
+        <!-- 다음 페이지 -->
+        {% if model_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ model_list.next_num }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징 처리 end -->
+
+
+    <!-- 모델 등록하기 버튼 -->
+    <hr>
+    <br />
+    <h6>관리자 전용</h6>
+        <a href="{{ url_for('model.create') }}" class="btn btn-primary">모델 등록하기</a>
+
+</div>
+{% endblock %}
